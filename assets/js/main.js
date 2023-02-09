@@ -61,7 +61,59 @@ $('#team_slide').owlCarousel({
   }
 })
 
+
+//Testimonial Slider
+let testimonialSlider = $('#testimonial_slide').owlCarousel({
+  items: 1,
+  loop: true,
+  nav: false, //navigation off
+  dots: true,
+  dotsEach: true,
+  autoplay: true,
+  smartSpeed: 500,
+  autoplayTimeout: 4000,
+  dotsContainer: ".testimonial-profile-nav",
+  rewind: true,
+
+ 
+});
+
+//change slides when clicked
+$(".profile-nav-item").on("click", function(){
+  testimonialSlider.trigger("to.owl.carousel", [$(this).index(), 1000])
+});
+
+let galleryFilter = $(".gallery-filter").isotope({
+  itemSelector:".gallery-item",
+  masonry: {
+    columnWidth: 80
+  }
+});
+$(".gl-btn-wrapper").on("click", "span", function(){
+  let filterValue = $(this).attr("data-filter");
+  galleryFilter.isotope({
+   filter:  filterValue,
   });
+  console.log(filterValue);
+})
+
+ $(".gl-btn-wrapper").each(function(i, itemGl){
+  let item  = $(itemGl);
+  item.on("click", 'span', function(){
+    item.find(".btn-danger").removeClass("btn-danger").addClass("btn-danger-outline");
+    $(this).addClass("btn-danger").removeClass("btn-danger-outline");
+    
+  });
+  
+ });
+
+
+
+  });
+
+
+  
+
 
 
   var wind = $(window);
@@ -93,7 +145,7 @@ $('#team_slide').owlCarousel({
   
         textHolder.innerHTML = newText;
 
-        var letters = document.querySelectorAll('[name="light"'),
+        var letters = document.querySelectorAll('[name="light"]'),
         flickers = [5, 7, 9, 11, 13, 15, 17],
           randomLetter,
           flickerNumber,
@@ -130,7 +182,6 @@ $('#team_slide').owlCarousel({
   
           randomLetter = randomFromInterval(0, letters.length);
           rnLet = letters[randomLetter];
-          console.log(rnLet);
           
           flickerNumber = randomFromInterval(0, 7);
           flickerNumber = flickers[flickerNumber];
